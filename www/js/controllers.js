@@ -1,6 +1,6 @@
 angular.module('todo.controllers', [])
 
-.controller('TodoCtrl', function($scope, $timeout, $ionicModal, Projects, $ionicSideMenuDelegate) {
+.controller('TodoCtrl', function($scope, $timeout, $ionicModal, $ionicSideMenuDelegate, $ionicPopup, Projects) {
 
   $scope.projects = Projects.all();
 
@@ -79,9 +79,29 @@ angular.module('todo.controllers', [])
     $ionicSideMenuDelegate.toggleLeft();
   };
 
+  $scope.data = {};
+
   $timeout(function() {
     if ($scope.projects.length == 0) {
-      $scope.newProject();
+      $ionicPopup.show({
+        template: '<input type="text" ng-model="data.title">',
+        title: 'Enter Your First Project',
+        scope: $scope,
+        buttons: [
+          {
+            text: '<b>Create Project</b>',
+            type: 'button-positive',
+            onTap: function(e) {
+              if (!$scope.data.title) {
+                e.preventDefault();
+              } else {
+                $scope.createProject({ title: $scope.data.title });
+                return;
+              }
+            }
+          }
+        ]
+      });
     }
   });
 });
