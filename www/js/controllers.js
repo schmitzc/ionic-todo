@@ -1,6 +1,9 @@
 angular.module('todo.controllers', [])
 
 .controller('TodoCtrl', function($scope, $timeout, $ionicModal, $ionicSideMenuDelegate, $ionicPopup, Projects) {
+  $scope.submitted = false;
+  $scope.project = { title: "" };
+  $scope.task = { title: "" };
 
   $scope.projects = Projects.all();
 
@@ -27,7 +30,7 @@ angular.module('todo.controllers', [])
 
     $scope.selectProject(newProject, $scope.projects.length-1);
 
-    project.title = "";
+    $scope.resetProjectForm();
   };
 
   $scope.newProject = function() {
@@ -36,6 +39,20 @@ angular.module('todo.controllers', [])
 
   $scope.closeNewProject = function() {
     $scope.projectModal.hide();
+    $scope.resetProjectForm();
+  };
+
+  $scope.resetProjectForm = function() {
+    $scope.project = { title: "" };
+    $scope.resetForm();
+  };
+
+  $scope.submitForm = function() {
+    $scope.submitted = true;
+  };
+
+  $scope.resetForm = function() {
+    $scope.submitted = false;
   };
 
   $scope.selectProject = function(project, index) {
@@ -64,7 +81,7 @@ angular.module('todo.controllers', [])
 
     Projects.save($scope.projects);
 
-    task.title = "";
+    $scope.resetTaskForm();
   };
 
   $scope.newTask = function() {
@@ -73,6 +90,12 @@ angular.module('todo.controllers', [])
 
   $scope.closeNewTask = function() {
     $scope.taskModal.hide();
+    $scope.resetTaskForm();
+  };
+
+  $scope.resetTaskForm = function() {
+    $scope.task = { title: "" };
+    $scope.resetForm();
   };
 
   $scope.toggleProjects = function() {
