@@ -25,7 +25,7 @@ angular.module('todo.controllers', [])
     $ionicSideMenuDelegate.toggleLeft(false);
   };
 
-  $ionicModal.fromTemplateUrl('new-task.html', function(modal) {
+  $ionicModal.fromTemplateUrl('templates/new-task.html', function(modal) {
     $scope.taskModal = modal;
   }, {
     scope: $scope
