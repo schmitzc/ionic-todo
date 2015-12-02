@@ -9,7 +9,8 @@ angular.module('todo.controllers', [])
   $ionicModal.fromTemplateUrl('templates/new-project.html', function(modal) {
     $scope.projectModal = modal;
   }, {
-    scope: $scope
+    scope: $scope,
+    focusFirstInput: true
   });
 
   $scope.createProject = function(project) {
@@ -25,6 +26,8 @@ angular.module('todo.controllers', [])
     Projects.save($scope.projects);
 
     $scope.selectProject(newProject, $scope.projects.length-1);
+
+    project.title = "";
   };
 
   $scope.newProject = function() {
@@ -44,7 +47,8 @@ angular.module('todo.controllers', [])
   $ionicModal.fromTemplateUrl('templates/new-task.html', function(modal) {
     $scope.taskModal = modal;
   }, {
-    scope: $scope
+    scope: $scope,
+    focusFirstInput: true
   });
 
   $scope.createTask = function(task) {
