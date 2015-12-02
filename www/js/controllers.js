@@ -1,22 +1,38 @@
 angular.module('todo.controllers', [])
 
 .controller('TodoCtrl', function($scope, $timeout, $ionicModal, Projects, $ionicSideMenuDelegate) {
-  var createProject = function(projectTitle) {
-    var newProject = Projects.newProject(projectTitle);
-    $scope.projects.push(newProject);
-    Projects.save($scope.projects);
-    $scope.selectProject(newProject, $scope.projects.length-1);
-  };
 
   $scope.projects = Projects.all();
 
   $scope.activeProject = $scope.projects[Projects.getLastActiveIndex()];
 
-  $scope.newProject = function() {
-    var projectTitle = prompt('Project name');
-    if (projectTitle) {
-      createProject(projectTitle);
+  $ionicModal.fromTemplateUrl('templates/new-project.html', function(modal) {
+    $scope.projectModal = modal;
+  }, {
+    scope: $scope
+  });
+
+  $scope.createProject = function(project) {
+    if (!project) {
+      return;
     }
+
+    var newProject = Projects.newProject(project.title);
+    $scope.projects.push(newProject);
+
+    $scope.projectModal.hide();
+
+    Projects.save($scope.projects);
+
+    $scope.selectProject(newProject, $scope.projects.length-1);
+  };
+
+  $scope.newProject = function() {
+    $scope.projectModal.show();
+  };
+
+  $scope.closeNewProject = function() {
+    $scope.projectModal.hide();
   };
 
   $scope.selectProject = function(project, index) {
@@ -61,13 +77,7 @@ angular.module('todo.controllers', [])
 
   $timeout(function() {
     if ($scope.projects.length == 0) {
-      while(true) {
-        var projectTitle = prompt('Your first project title:');
-        if (projectTitle) {
-          createProject(projectTitle);
-          break;
-        }
-      }
+      $scope.newProject();
     }
   });
 });
