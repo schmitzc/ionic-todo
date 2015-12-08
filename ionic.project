@@ -2,7 +2,7 @@
   "name": "ionic-todo",
   "app_id": "",
   "gulpStartupTasks": [
-    "index",
+    "scripts",
     "watch"
   ]
 }
