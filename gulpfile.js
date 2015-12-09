@@ -13,8 +13,9 @@ var uglify = require('gulp-uglify');
 var paths = {
   sass: ['./scss/**/*.scss'],
   javascript: [
-    './www/js/app.js',
-    './www/**/*.js',
+    './www/app/app.js',
+    './www/app/**/*.js',
+    '!./www/app/**/*.spec.js',
     '!./www/lib/**'
   ]
 };

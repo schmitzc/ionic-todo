@@ -1,13 +1,13 @@
-angular.module('todo.controllers', [])
+angular.module('app')
 
-.controller('TodoCtrl', function($scope, $timeout, $ionicModal, $ionicSideMenuDelegate, $ionicPopup, Projects) {
+.controller('TodoCtrl', function($scope, $timeout, $ionicModal, $ionicSideMenuDelegate, $ionicPopup, projectService) {
   $scope.submitted = false;
   $scope.project = { title: "" };
   $scope.task = { title: "" };
 
-  $scope.projects = Projects.all();
+  $scope.projects = projectService.all();
 
-  $scope.activeProject = $scope.projects[Projects.getLastActiveIndex()];
+  $scope.activeProject = $scope.projects[projectService.getLastActiveIndex()];
 
   $ionicModal.fromTemplateUrl('templates/new-project.html', function(modal) {
     $scope.projectModal = modal;
@@ -21,12 +21,12 @@ angular.module('todo.controllers', [])
       return;
     }
 
-    var newProject = Projects.newProject(project.title);
+    var newProject = projectService.newProject(project.title);
     $scope.projects.push(newProject);
 
     $scope.projectModal.hide();
 
-    Projects.save($scope.projects);
+    projectService.save($scope.projects);
 
     $scope.selectProject(newProject, $scope.projects.length-1);
 
@@ -57,7 +57,7 @@ angular.module('todo.controllers', [])
 
   $scope.selectProject = function(project, index) {
     $scope.activeProject = project;
-    Projects.setLastActiveIndex(index);
+    projectService.setLastActiveIndex(index);
     $ionicSideMenuDelegate.toggleLeft(false);
   };
 
@@ -79,7 +79,7 @@ angular.module('todo.controllers', [])
 
     $scope.taskModal.hide();
 
-    Projects.save($scope.projects);
+    projectService.save($scope.projects);
 
     $scope.resetTaskForm();
   };
