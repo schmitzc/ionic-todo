@@ -17,22 +17,22 @@
     <!-- your app's js -->
     <script src="js/all.js"></script>
   </head>
-  <body ng-app="app" ng-controller="TodoCtrl">
+  <body ng-app="app" ng-controller="ProjectController as ctrl">
     <ion-side-menus>
       <ion-side-menu-content>
         <ion-header-bar class="bar-dark">
-          <button class="button button-icon ion-navicon" ng-click="toggleProjects()">
+          <button class="button button-icon ion-navicon" ng-click="ctrl.toggleProjects()">
           </button>
 
-          <h1 class="title">{{activeProject.title}}</h1>
+          <h1 class="title">{{ ctrl.activeProject.title }}</h1>
 
-          <button class="button button-icon ion-compose" ng-click="newTask()">
+          <button class="button button-icon ion-compose" ng-click="ctrl.newTask()">
           </button>
         </ion-header-bar>
 
         <ion-content scroll="false"> 
           <ion-list>
-            <ion-item ng-repeat="task in activeProject.tasks">
+            <ion-item ng-repeat="task in ctrl.activeProject.tasks">
               {{task.title}}
             </ion-item>
           </ion-list>
@@ -43,12 +43,12 @@
         <ion-header-bar class="bar-dark">
           <h1 class="title">Projects</h1>
 
-          <button class="button button-icon ion-plus" ng-click="newProject()">
+          <button class="button button-icon ion-plus" ng-click="ctrl.newProject()">
           </button>
         </ion-header-bar>
         <ion-content scroll="false">
           <ion-list>
-            <ion-item ng-repeat="project in projects" ng-click="selectProject(project, $index)" ng-class="{active: activeProject == project}">
+            <ion-item ng-repeat="project in ctrl.projects" ng-click="ctrl.selectProject(project, $index)" ng-class="{active: activeProject == project}">
               {{project.title}}
             </ion-item>
           </ion-list>

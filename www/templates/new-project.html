@@ -1,25 +1,25 @@
-<div class="modal">
+<div class="modal" ng-controller="NewProjectController as ctrl">
   <ion-header-bar class="bar-secondary">
     <h1 class="title">New Project</h1>
-    <button class="button button-clear button-positive" ng-click="closeNewProject()">
+    <button class="button button-clear button-positive" ng-click="ctrl.closeNewProject()">
       Cancel
     </button>
   </ion-header-bar>
 
   <ion-content>
-    <form name="projectForm" ng-submit="createProject(project)">
+    <form name="projectForm" ng-submit="ctrl.submitProject(project)">
       <div class="list">
         <label class="item item-input">
           <input type="text" name="title" placeholder="Project title" required ng-model="project.title">
 
-          <span class="input-label error" ng-show="submitted && projectForm.title.$error.required">
+          <span class="input-label error" ng-show="ctrl.submitted && projectForm.title.$error.required">
             Required
           </span>
         </label>
       </div>
 
       <div class="padding">
-        <button type="submit" class="button button-block button-positive" ng-click="submitForm()">
+        <button type="submit" class="button button-block button-positive" ng-click="ctrl.submitForm()">
           Create Project
         </button>
       </div>
