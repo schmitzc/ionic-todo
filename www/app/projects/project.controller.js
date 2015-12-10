@@ -67,10 +67,6 @@
       });
     };
 
-    function submitForm() {
-      ctrl.submitted = true;
-    };
-
     function toggleProjects() {
       $ionicSideMenuDelegate.toggleLeft();
     };
