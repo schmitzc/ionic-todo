@@ -67,6 +67,21 @@ describe('Projects', function() {
     });
   });
 
+  it('should close the new project modal', function() {
+    toggleProjectsMenu();
+
+    openNewProjectButton = getOpenNewProjectButton();
+    openNewProjectButton.isDisplayed().then(function() {
+      openNewProjectButton.click();
+
+      var modalEl = element(by.css('.new-project-modal'));
+      expect(modalEl.isDisplayed()).toBeTruthy();
+
+      element(by.css('.close-new-project')).click();
+      expect(modalEl.isDisplayed()).toBeFalsy();
+    });
+  });
+
   function getActiveProjectTitle() {
     return element(by.css('.active-project-title')).getText()
   }
