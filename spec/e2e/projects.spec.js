@@ -36,23 +36,34 @@ describe('Projects', function() {
   });
 
   it('should create a new project', function() {
-    element(by.css('.toggle-projects-menu')).click();
+    toggleProjectsMenu();
 
-    openProjectEl = element(by.css('.open-new-project'));
-    openProjectEl.isDisplayed().then(function() {
-      openProjectEl.click();
+    openNewProjectButton = getOpenNewProjectButton();
+    openNewProjectButton.isDisplayed().then(function() {
+      openNewProjectButton.click();
 
       var project = 'Release';
       element(by.model('project.title')).sendKeys(project);
       element(by.buttonText('Create Project')).click();
 
-      var projects = element.all(by.repeater('project in ctrl.projects'));
+      var projects = getProjects();
       expect(projects.count()).toEqual(2);
       expect(projects.get(1).getText()).toEqual(project);
 
       expect(getActiveProjectTitle()).toEqual(project);
 
       expect(getTasks().count()).toEqual(0);
+    });
+  });
+
+  it('should select a project', function() {
+    toggleProjectsMenu();
+
+    openNewProjectButton = getOpenNewProjectButton();
+    openNewProjectButton.isDisplayed().then(function() {
+      getProjects().get(0).click();
+      expect(getActiveProjectTitle()).toEqual(initialProjectTitle);
+      expect(getTasks().count()).toEqual(1);
     });
   });
 
@@ -64,8 +75,20 @@ describe('Projects', function() {
     return element.all(by.repeater('task in ctrl.activeProject.tasks'));
   }
 
+  function getProjects() {
+    return element.all(by.repeater('project in ctrl.projects'));
+  }
+
+  function getOpenNewProjectButton() {
+    return element(by.css('.open-new-project'));
+  }
+
   function openNewTaskModal() {
     element(by.css('.open-new-task')).click();
+  }
+
+  function toggleProjectsMenu() {
+    element(by.css('.toggle-projects-menu')).click();
   }
 
   function takeScreenshot() {
