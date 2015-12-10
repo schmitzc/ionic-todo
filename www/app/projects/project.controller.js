@@ -23,13 +23,13 @@
 
       ctrl.activeProject = ctrl.projects[projectService.getLastActiveIndex()];
 
-      $ionicModal.fromTemplateUrl('templates/new-project.html', function(modal) {
+      $ionicModal.fromTemplateUrl('app/projects/new-project.html', function(modal) {
         ctrl.projectModal = modal;
       }, {
         focusFirstInput: true
       });
 
-      $ionicModal.fromTemplateUrl('templates/new-task.html', function(modal) {
+      $ionicModal.fromTemplateUrl('app/projects/new-task.html', function(modal) {
         ctrl.taskModal = modal;
       }, {
         focusFirstInput: true
