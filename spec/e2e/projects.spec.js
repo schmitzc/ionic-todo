@@ -1,18 +1,16 @@
 describe('Projects', function() {
   var fs = require('fs');
-  var driver;
+  var initialProjectTitle = 'Tests';
 
   beforeAll(function() {
-    driver = browser.driver;
-
     browser.get('/');
 
-    element(by.model('data.title')).sendKeys('Tests');
+    element(by.model('data.title')).sendKeys(initialProjectTitle);
     element(by.buttonText('Create Project')).click();
   });
 
   it('should select the initial project', function() {
-    expect(element(by.css('.active-project-title')).getText()).toEqual('Tests');
+    expect(getActiveProjectTitle()).toEqual(initialProjectTitle);
   });
 
   it('should create a task', function() {
@@ -22,7 +20,7 @@ describe('Projects', function() {
     element(by.model('task.title')).sendKeys(task);
     element(by.buttonText('Create Task')).click();
 
-    var tasks = element.all(by.repeater('task in ctrl.activeProject.tasks'));
+    var tasks = getTasks();
     expect(tasks.count()).toEqual(1);
     expect(tasks.get(0).getText()).toEqual(task);
   });
@@ -37,6 +35,35 @@ describe('Projects', function() {
     expect(modalEl.isDisplayed()).toBeFalsy();
   });
 
+  it('should create a new project', function() {
+    element(by.css('.toggle-projects-menu')).click();
+
+    openProjectEl = element(by.css('.open-new-project'));
+    openProjectEl.isDisplayed().then(function() {
+      openProjectEl.click();
+
+      var project = 'Release';
+      element(by.model('project.title')).sendKeys(project);
+      element(by.buttonText('Create Project')).click();
+
+      var projects = element.all(by.repeater('project in ctrl.projects'));
+      expect(projects.count()).toEqual(2);
+      expect(projects.get(1).getText()).toEqual(project);
+
+      expect(getActiveProjectTitle()).toEqual(project);
+
+      expect(getTasks().count()).toEqual(0);
+    });
+  });
+
+  function getActiveProjectTitle() {
+    return element(by.css('.active-project-title')).getText()
+  }
+
+  function getTasks() {
+    return element.all(by.repeater('task in ctrl.activeProject.tasks'));
+  }
+
   function openNewTaskModal() {
     element(by.css('.open-new-task')).click();
   }
@@ -47,5 +74,5 @@ describe('Projects', function() {
       stream.write(new Buffer(png, 'base64'));
       stream.end();
     });
-  };
+  }
 });

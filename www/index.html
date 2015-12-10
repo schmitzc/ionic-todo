@@ -21,7 +21,7 @@
     <ion-side-menus>
       <ion-side-menu-content>
         <ion-header-bar class="bar-dark">
-          <button class="button button-icon ion-navicon" ng-click="ctrl.toggleProjects()">
+          <button class="toggle-projects-menu button button-icon ion-navicon" ng-click="ctrl.toggleProjects()">
           </button>
 
           <h1 class="active-project-title title">{{ ctrl.activeProject.title }}</h1>
@@ -43,7 +43,7 @@
         <ion-header-bar class="bar-dark">
           <h1 class="title">Projects</h1>
 
-          <button class="button button-icon ion-plus" ng-click="ctrl.newProject()">
+          <button class="open-new-project button button-icon ion-plus" ng-click="ctrl.newProject()">
           </button>
         </ion-header-bar>
         <ion-content scroll="false">
