@@ -2,7 +2,14 @@
   angular.module('app')
   .controller('ProjectController', ProjectController);
 
-  function ProjectController($scope, $ionicModal, $ionicSideMenuDelegate, projectService) {
+  function ProjectController(
+    $scope,
+    $timeout,
+    $ionicPopup,
+    $ionicModal,
+    $ionicSideMenuDelegate,
+    projectService) {
+
     var ctrl = this;
 
     ctrl.task = { title: "" };
@@ -49,6 +56,14 @@
 
       $scope.$on('newTaskClosed', function(event, arg) {
         ctrl.closeNewTask();
+      });
+
+      $scope.data = {};
+
+      $timeout(function() {
+        if (ctrl.projects.length == 0) {
+          initialCreateProjectPopup();
+        }
       });
     };
 
@@ -106,6 +121,28 @@
 
     function closeNewTask() {
       ctrl.taskModal.hide();
+    };
+
+    function initialCreateProjectPopup() {
+      $ionicPopup.show({
+        template: '<input type="text" ng-model="data.title">',
+        title: 'Enter Your First Project',
+        scope: $scope,
+        buttons: [
+          {
+            text: '<b>Create Project</b>',
+            type: 'button-positive',
+            onTap: function(e) {
+              if (!$scope.data.title) {
+                e.preventDefault();
+              } else {
+                ctrl.createProject({ title: $scope.data.title });
+                return;
+              }
+            }
+          }
+        ]
+      });
     };
   };
 })();

@@ -1,8 +1,10 @@
 describe('project controller', function() {
   var controller,
     projectServiceMock,
+    ionicPopupMock,
     ionicModalMock,
-    ionicSideMenuDelegateMock;
+    ionicSideMenuDelegateMock,
+    timeoutMock;
 
   var project = {
     title: 'Tests',
@@ -21,7 +23,7 @@ describe('project controller', function() {
 
   beforeEach(module('app'));
 
-  beforeEach(inject(function($controller, $rootScope) {
+  beforeEach(inject(function($controller, $rootScope, $timeout) {
     scope = $rootScope.$new();
 
     projectServiceMock = {
@@ -39,6 +41,10 @@ describe('project controller', function() {
       save: jasmine.createSpy('save spy'),
     };
 
+    timeoutMock = $timeout;
+
+    ionicPopupMock = jasmine.createSpyObj('$ionicPopup spy', ['show']);
+
     ionicModalMock = jasmine.createSpyObj('$ionicModal spy', ['fromTemplateUrl']);
 
     ionicSideMenuDelegateMock = jasmine.createSpyObj(
@@ -48,9 +54,11 @@ describe('project controller', function() {
 
     controller = $controller('ProjectController', {
       'projectService': projectServiceMock,
+      '$ionicPopup': ionicPopupMock,
       '$ionicModal': ionicModalMock,
       '$ionicSideMenuDelegate': ionicSideMenuDelegateMock,
-      '$scope': scope
+      '$scope': scope,
+      '$timeout': timeoutMock
     });
 
     controller.projectModal = jasmine.createSpyObj(
@@ -80,6 +88,14 @@ describe('project controller', function() {
 
     it('should set the active project', function() {
       expect(controller.activeProject).toEqual(projects[0]);
+    });
+
+    it('should show a popup for initial project creation', function() {
+      controller.projects = [];
+
+      timeoutMock.flush();
+
+      expect(ionicPopupMock.show).toHaveBeenCalled();
     });
   });
 
