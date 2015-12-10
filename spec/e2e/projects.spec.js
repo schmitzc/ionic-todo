@@ -16,7 +16,7 @@ describe('Projects', function() {
   });
 
   it('should create a task', function() {
-    element(by.css('.ion-compose')).click();
+    openNewTaskModal();
 
     var task = 'Write tests';
     element(by.model('task.title')).sendKeys(task);
@@ -26,6 +26,20 @@ describe('Projects', function() {
     expect(tasks.count()).toEqual(1);
     expect(tasks.get(0).getText()).toEqual(task);
   });
+
+  it('should close the new task modal', function() {
+    openNewTaskModal();
+
+    var modalEl = element(by.css('.new-task-modal'));
+    expect(modalEl.isDisplayed()).toBeTruthy();
+
+    element(by.css('.close-new-task')).click();
+    expect(modalEl.isDisplayed()).toBeFalsy();
+  });
+
+  function openNewTaskModal() {
+    element(by.css('.open-new-task')).click();
+  }
 
   function takeScreenshot() {
     browser.takeScreenshot().then(function(png) {

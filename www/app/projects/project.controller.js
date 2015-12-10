@@ -65,6 +65,11 @@
           initialCreateProjectPopup();
         }
       });
+
+      $scope.$on('$destroy', function() {
+        $scope.projectModal.remove();
+        $scope.taskModal.remove();
+      });
     };
 
     function toggleProjects() {
