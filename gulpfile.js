@@ -67,3 +67,18 @@ gulp.task('git-check', function(done) {
   }
   done();
 });
+
+gulp.task('test-ios', runAppiumSpecsOnIos);
+gulp.task('test-android', runAppiumSpecsOnAndroid);
+
+function runAppiumSpecs(platform) {
+  sh.exec('PLATFORM=' + platform + ' mocha spec/appium/**/*.spec.js');
+}
+
+function runAppiumSpecsOnIos() {
+  runAppiumSpecs('ios');
+}
+
+function runAppiumSpecsOnAndroid() {
+  runAppiumSpecs('android');
+}
