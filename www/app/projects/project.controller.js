@@ -126,7 +126,7 @@
 
     function initialCreateProjectPopup() {
       $ionicPopup.show({
-        template: '<input type="text" ng-model="data.title">',
+        template: '<input class="project-title" type="text" ng-model="data.title">',
         title: 'Enter Your First Project',
         scope: $scope,
         buttons: [
