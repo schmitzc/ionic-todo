@@ -4,7 +4,7 @@ describe('new task controller', function() {
 
   var taskData = { title: 'Write tests' };
 
-  beforeEach(module('app'));
+  beforeEach(module('app.projects'));
 
   beforeEach(inject(function($controller) {
     rootScopeMock = jasmine.createSpyObj('$rootScope spy', ['$broadcast']);

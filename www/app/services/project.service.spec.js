@@ -12,7 +12,7 @@ describe('project service', function() {
     }
   ];
 
-  beforeEach(module('app'));
+  beforeEach(module('app.services'));
 
   beforeEach(module(function($provide) {
     $provide.value('$window', window);

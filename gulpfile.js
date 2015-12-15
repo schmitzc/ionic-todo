@@ -11,7 +11,7 @@ var closureCompiler = require('gulp-closure-compiler');
 var paths = {
   sass: ['./scss/**/*.scss'],
   javascript: [
-    './www/app/app.js',
+    './www/app/**/*.module.js',
     './www/app/**/*.js',
     '!./www/app/**/*.spec.js',
     '!./www/lib/**'

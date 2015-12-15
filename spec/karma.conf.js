@@ -17,6 +17,7 @@ module.exports = function(config) {
     files: [
       'www/lib/ionic/js/ionic.bundle.js',
       'www/lib/angular-mocks/angular-mocks.js',
+      'www/app/**/*.module.js',
       'www/app/**/*.js',
       'www/app/**/*.spec.js'
     ],

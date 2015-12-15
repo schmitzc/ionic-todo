@@ -1,5 +1,5 @@
 (function() {
-  angular.module('app')
+  angular.module('app.projects')
   .controller('NewTaskController', ['$rootScope', NewTaskController]);
 
   function NewTaskController($rootScope) {

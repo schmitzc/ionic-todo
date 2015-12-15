@@ -21,7 +21,7 @@ describe('project controller', function() {
   var projectData = { title: 'Tests' };
   var taskData = { title: 'Write test' };
 
-  beforeEach(module('app'));
+  beforeEach(module('app.projects'));
 
   beforeEach(inject(function($controller, $rootScope, $timeout) {
     scope = $rootScope.$new();

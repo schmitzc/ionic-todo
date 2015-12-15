@@ -4,7 +4,7 @@ describe('new project controller', function() {
 
   var projectData = { title: 'Tests' };
 
-  beforeEach(module('app'));
+  beforeEach(module('app.projects'));
 
   beforeEach(inject(function($controller) {
     rootScopeMock = jasmine.createSpyObj('$rootScope spy', ['$broadcast']);

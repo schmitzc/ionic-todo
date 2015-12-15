@@ -1,6 +1,6 @@
 (function() {
   angular
-    .module('app')
+    .module('app.services')
     .factory('projectService', ['$window', projectService]);
 
   function projectService($window) {

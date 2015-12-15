@@ -1,5 +1,5 @@
 (function() {
-  angular.module('app')
+  angular.module('app.projects')
   .controller('ProjectController', [
     '$scope',
     '$timeout',
