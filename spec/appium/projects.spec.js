@@ -22,12 +22,10 @@ require(path.resolve('spec/appium/setup.js'))(function(driver) {
     var task = 'Write tests';
 
     return driver
-      .waitForElementByCss(openNewTaskSelector, wd.asserters.isDisplayed, 2000, function(err, el) {
-        el.click();
-      })
-      .waitForElementByCss('.task-title', wd.asserters.isDisplayed, 2000, function(err, el) {
-        el.type(task);
-      })
+      .waitForElementByCss(openNewTaskSelector, wd.asserters.isDisplayed, 2000)
+      .click()
+      .waitForElementByCss('.task-title', wd.asserters.isDisplayed, 2000)
+      .type(task)
       .elementByCss('.create-task').click()
       .elementsByCss('.task').then(function(elements) {
         elements.length.should.equal(1);
@@ -37,13 +35,11 @@ require(path.resolve('spec/appium/setup.js'))(function(driver) {
 
   it('should close the new task modal', function() {
     return driver
-      .waitForElementByCss(openNewTaskSelector, wd.asserters.isDisplayed, 2000, function(err, el) {
-        el.click();
-      })
-      .waitForElementByCss('.close-new-task', wd.asserters.isDisplayed, 2000, function(err, el) {
-        el.click();
-      })
-      .waitForElementByCss(activeProjectSelector, wd.asserters.isDisplayed, 2000);
+      .waitForElementByCss(openNewTaskSelector, wd.asserters.isDisplayed, 2000)
+      .click()
+      .waitForElementByCss('.close-new-task', wd.asserters.isDisplayed, 2000)
+      .click()
+      .waitForElementByCss('.new-task-modal', wd.asserters.isNotDisplayed, 2000);
   });
 
   it('should create a new project', function() {
@@ -78,12 +74,10 @@ require(path.resolve('spec/appium/setup.js'))(function(driver) {
   it('should close the new project modal', function() {
     return driver
       .elementByCss(toggleProjectsSelector).click()
-      .waitForElementByCss(openNewProjectSelector, wd.asserters.isDisplayed, 2000, function(err, el) {
-        el.click();
-      })
-      .waitForElementByCss('.close-new-project', wd.asserters.isDisplayed, 2000, function(err, el) {
-        el.click();
-      })
-      .waitForElementByCss(activeProjectSelector, wd.asserters.isDisplayed, 2000);
+      .waitForElementByCss(openNewProjectSelector, wd.asserters.isDisplayed, 2000)
+      .click()
+      .waitForElementByCss('.close-new-project', wd.asserters.isDisplayed, 2000)
+      .click()
+      .waitForElementByCss('.new-project-modal', wd.asserters.isNotDisplayed, 2000);
   });
 });
