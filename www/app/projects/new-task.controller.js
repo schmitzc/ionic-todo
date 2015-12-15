@@ -13,7 +13,7 @@
 
     function submitForm() {
       ctrl.submitted = true;
-    };
+    }
 
     function submitTask(task) {
       if (!task) {
@@ -23,7 +23,7 @@
       $rootScope.$broadcast('newTaskSubmitted', task);
 
       resetForm();
-    };
+    }
 
     function resetForm() {
       ctrl.task = { title: "" };
@@ -35,5 +35,5 @@
 
       resetForm();
     }
-  };
+  }
 })();

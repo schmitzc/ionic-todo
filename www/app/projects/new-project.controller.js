@@ -13,7 +13,7 @@
 
     function submitForm() {
       ctrl.submitted = true;
-    };
+    }
 
     function submitProject(project) {
       if (!project) {
@@ -23,7 +23,7 @@
       $rootScope.$broadcast('newProjectSubmitted', project);
 
       resetForm();
-    };
+    }
 
     function closeNewProject() {
       $rootScope.$broadcast('newProjectClosed', null);
@@ -35,5 +35,5 @@
       ctrl.project = { title: "" };
       ctrl.submitted = false;
     }
-  };
+  }
 })();

@@ -78,25 +78,25 @@
         $scope.projectModal.remove();
         $scope.taskModal.remove();
       });
-    };
+    }
 
     function toggleProjects() {
       $ionicSideMenuDelegate.toggleLeft();
-    };
+    }
 
     function selectProject(project, index) {
       ctrl.activeProject = project;
       projectService.setLastActiveIndex(index);
       $ionicSideMenuDelegate.toggleLeft(false);
-    };
+    }
 
     function newProject() {
       ctrl.projectModal.show();
-    };
+    }
 
     function newTask() {
       ctrl.taskModal.show();
-    };
+    }
 
     function createProject(project) {
       var newProject = projectService.newProject(project.title);
@@ -108,11 +108,11 @@
       projectService.save(ctrl.projects);
 
       ctrl.selectProject(newProject, ctrl.projects.length - 1);
-    };
+    }
 
     function closeNewProject() {
       ctrl.projectModal.hide();
-    };
+    }
 
     function createTask(task) {
       if (!ctrl.activeProject || !task) {
@@ -126,11 +126,11 @@
       ctrl.taskModal.hide();
 
       projectService.save(ctrl.projects);
-    };
+    }
 
     function closeNewTask() {
       ctrl.taskModal.hide();
-    };
+    }
 
     function initialCreateProjectPopup() {
       $ionicPopup.show({
@@ -152,6 +152,6 @@
           }
         ]
       });
-    };
-  };
+    }
+  }
 })();
