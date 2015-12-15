@@ -8,6 +8,7 @@ require(path.resolve('spec/appium/setup.js'))(function(driver) {
   var activeProjectSelector = '.active-project-title';
   var openNewTaskSelector = '.open-new-task';
   var toggleProjectsSelector = '.toggle-projects-menu';
+  var openNewProjectSelector = '.open-new-project';
 
   it('should create the initial project', function () {
     return driver
@@ -50,7 +51,7 @@ require(path.resolve('spec/appium/setup.js'))(function(driver) {
 
     return driver
       .elementByCss(toggleProjectsSelector).click()
-      .elementByCss('.open-new-project').click()
+      .elementByCss(openNewProjectSelector).click()
       .elementByCss('.project-title').type(project)
       .elementByCss('.create-project').click()
       .elementByCss(activeProjectSelector).text()
@@ -72,5 +73,17 @@ require(path.resolve('spec/appium/setup.js'))(function(driver) {
       .elementsByCss('.task').then(function(elements) {
         elements.length.should.equal(1);
       });
+  });
+
+  it('should close the new project modal', function() {
+    return driver
+      .elementByCss(toggleProjectsSelector).click()
+      .waitForElementByCss(openNewProjectSelector, wd.asserters.isDisplayed, 2000, function(err, el) {
+        el.click();
+      })
+      .waitForElementByCss('.close-new-project', wd.asserters.isDisplayed, 2000, function(err, el) {
+        el.click();
+      })
+      .waitForElementByCss(activeProjectSelector, wd.asserters.isDisplayed, 2000);
   });
 });
