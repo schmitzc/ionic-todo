@@ -1,14 +1,17 @@
 (function() {
-  angular.module('app.projects')
-  .controller('ProjectController', [
-    '$scope',
-    '$timeout',
-    '$ionicPopup',
-    '$ionicModal',
-    '$ionicSideMenuDelegate',
-    'projectService',
-    ProjectController
-  ]);
+  'use strict';
+
+  angular
+    .module('app.projects')
+    .controller('ProjectController', [
+      '$scope',
+      '$timeout',
+      '$ionicPopup',
+      '$ionicModal',
+      '$ionicSideMenuDelegate',
+      'projectService',
+      ProjectController
+    ]);
 
   function ProjectController(
     $scope,

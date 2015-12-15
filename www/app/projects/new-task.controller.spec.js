@@ -1,3 +1,5 @@
+'use strict';
+
 describe('new task controller', function() {
   var controller,
     rootScopeMock;

@@ -1,3 +1,5 @@
+'use strict';
+
 describe('project service', function() {
   var projectService;
 
@@ -30,15 +32,11 @@ describe('project service', function() {
     it('should return the projects as JSON', function() {
       window.localStorage['projects'] = angular.toJson(projects);
 
-      allProjects = projectService.all();
-
-      expect(allProjects).toEqual(projects);
+      expect(projectService.all()).toEqual(projects);
     });
 
     it('should return an empty array if no projects', function() {
-      allProjects = projectService.all();
-
-      expect(allProjects).toEqual([]);
+      expect(projectService.all()).toEqual([]);
     });
   });
 
@@ -49,9 +47,9 @@ describe('project service', function() {
   });
 
   it('should return a new project', function() {
-    projectTitle = 'Tests';
+    var projectTitle = 'Tests';
 
-    newProject = projectService.newProject(projectTitle);
+    var newProject = projectService.newProject(projectTitle);
 
     expect(newProject).toEqual({ title: projectTitle, tasks: [] });
   });

@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Projects', function() {
   var fs = require('fs');
   var initialProjectTitle = 'Tests';
@@ -38,7 +40,7 @@ describe('Projects', function() {
   it('should create a new project', function() {
     toggleProjectsMenu();
 
-    openNewProjectButton = getOpenNewProjectButton();
+    var openNewProjectButton = getOpenNewProjectButton();
     openNewProjectButton.isDisplayed().then(function() {
       openNewProjectButton.click();
 
@@ -59,7 +61,7 @@ describe('Projects', function() {
   it('should select a project', function() {
     toggleProjectsMenu();
 
-    openNewProjectButton = getOpenNewProjectButton();
+    var openNewProjectButton = getOpenNewProjectButton();
     openNewProjectButton.isDisplayed().then(function() {
       getProjects().get(0).click();
       expect(getActiveProjectTitle()).toEqual(initialProjectTitle);
@@ -70,7 +72,7 @@ describe('Projects', function() {
   it('should close the new project modal', function() {
     toggleProjectsMenu();
 
-    openNewProjectButton = getOpenNewProjectButton();
+    var openNewProjectButton = getOpenNewProjectButton();
     openNewProjectButton.isDisplayed().then(function() {
       openNewProjectButton.click();
 

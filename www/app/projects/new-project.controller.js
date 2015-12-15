@@ -1,6 +1,9 @@
 (function() {
-  angular.module('app.projects')
-  .controller('NewProjectController', ['$rootScope', NewProjectController]);
+  'use strict';
+
+  angular
+    .module('app.projects')
+    .controller('NewProjectController', ['$rootScope', NewProjectController]);
 
   function NewProjectController($rootScope) {
     var ctrl = this;

@@ -1,3 +1,5 @@
+'use strict';
+
 describe('new project controller', function() {
   var controller,
     rootScopeMock;

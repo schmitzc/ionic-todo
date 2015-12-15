@@ -1,6 +1,8 @@
 (function() {
+  'use strict';
+
   angular.module('app.projects')
-  .controller('NewTaskController', ['$rootScope', NewTaskController]);
+    .controller('NewTaskController', ['$rootScope', NewTaskController]);
 
   function NewTaskController($rootScope) {
     var ctrl = this;

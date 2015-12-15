@@ -1,3 +1,5 @@
+'use strict';
+
 describe('project controller', function() {
   var controller,
     projectServiceMock,
@@ -24,7 +26,7 @@ describe('project controller', function() {
   beforeEach(module('app.projects'));
 
   beforeEach(inject(function($controller, $rootScope, $timeout) {
-    scope = $rootScope.$new();
+    var scope = $rootScope.$new();
 
     projectServiceMock = {
       all: jasmine.createSpy('all projects spy')
