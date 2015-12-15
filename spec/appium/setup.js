@@ -20,7 +20,7 @@ module.exports = function(callback) {
     browserName: "",
     autoWebview: true,
     platformName: "iOS",
-    platformVersion: "9.1",
+    platformVersion: "9.2",
     deviceName: "iPhone 6",
     app: path.resolve("platforms/ios/build/emulator/Todo.app")
   };
