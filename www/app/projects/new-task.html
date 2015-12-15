@@ -10,7 +10,7 @@
     <form name="taskForm" ng-submit="ctrl.submitTask(task)">
       <div class="list">
         <label class="item item-input">
-          <input type="text" name="title" placeholder="What do you need to do?" required ng-model="task.title">
+          <input class="task-title" type="text" name="title" placeholder="What do you need to do?" required ng-model="task.title">
 
           <span class="input-label error" ng-show="ctrl.submitted && taskForm.title.$error.required">
             Required
@@ -19,7 +19,7 @@
       </div>
 
       <div class="padding">
-        <button type="submit" class="button button-block button-positive" ng-click="ctrl.submitForm()">
+        <button type="submit" class="create-task button button-block button-positive" ng-click="ctrl.submitForm()">
           Create Task
         </button>
       </div>
