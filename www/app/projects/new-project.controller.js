@@ -1,6 +1,6 @@
 (function() {
   angular.module('app')
-  .controller('NewProjectController', NewProjectController);
+  .controller('NewProjectController', ['$rootScope', NewProjectController]);
 
   function NewProjectController($rootScope) {
     var ctrl = this;

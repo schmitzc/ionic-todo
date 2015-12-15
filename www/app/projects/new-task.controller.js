@@ -1,6 +1,6 @@
 (function() {
   angular.module('app')
-  .controller('NewTaskController', NewTaskController);
+  .controller('NewTaskController', ['$rootScope', NewTaskController]);
 
   function NewTaskController($rootScope) {
     var ctrl = this;

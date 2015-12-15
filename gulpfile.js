@@ -6,9 +6,7 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
-var ngAnnotate = require('gulp-ng-annotate');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
+var closureCompiler = require('gulp-closure-compiler');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
@@ -37,9 +35,12 @@ gulp.task('sass', function(done) {
 
 gulp.task('scripts', function() {
   return gulp.src(paths.javascript)
-    .pipe(concat('all.js'))
-    .pipe(ngAnnotate())
-    .pipe(uglify())
+    .pipe(closureCompiler({
+      compilerPath: './node_modules/google-closure-compiler/compiler.jar',
+      fileName: 'all.js',
+      continueWithWarnings: true,
+      tieredCompilation: true
+    }))
     .pipe(gulp.dest('./www/js'));
 });
 

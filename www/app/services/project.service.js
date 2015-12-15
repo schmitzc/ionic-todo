@@ -1,7 +1,7 @@
 (function() {
   angular
     .module('app')
-    .factory('projectService', projectService);
+    .factory('projectService', ['$window', projectService]);
 
   function projectService($window) {
     return {

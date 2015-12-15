@@ -1,6 +1,14 @@
 (function() {
   angular.module('app')
-  .controller('ProjectController', ProjectController);
+  .controller('ProjectController', [
+    '$scope',
+    '$timeout',
+    '$ionicPopup',
+    '$ionicModal',
+    '$ionicSideMenuDelegate',
+    'projectService',
+    ProjectController
+  ]);
 
   function ProjectController(
     $scope,
