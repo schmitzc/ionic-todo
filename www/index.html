@@ -33,7 +33,7 @@
         <ion-content scroll="false"> 
           <ion-list>
             <ion-item ng-repeat="task in ctrl.activeProject.tasks">
-              {{task.title}}
+              <span class="task">{{task.title}}</span>
             </ion-item>
           </ion-list>
         </ion-content>
@@ -49,7 +49,7 @@
         <ion-content scroll="false">
           <ion-list>
             <ion-item ng-repeat="project in ctrl.projects" ng-click="ctrl.selectProject(project, $index)" ng-class="{active: activeProject == project}">
-              {{project.title}}
+              <span class="project">{{project.title}}</span>
             </ion-item>
           </ion-list>
         </ion-content>

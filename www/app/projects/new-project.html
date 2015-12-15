@@ -10,7 +10,7 @@
     <form name="projectForm" ng-submit="ctrl.submitProject(project)">
       <div class="list">
         <label class="item item-input">
-          <input type="text" name="title" placeholder="Project title" required ng-model="project.title">
+          <input class="project-title" type="text" name="title" placeholder="Project title" required ng-model="project.title">
 
           <span class="input-label error" ng-show="ctrl.submitted && projectForm.title.$error.required">
             Required
@@ -19,7 +19,7 @@
       </div>
 
       <div class="padding">
-        <button type="submit" class="button button-block button-positive" ng-click="ctrl.submitForm()">
+        <button type="submit" class="create-project button button-block button-positive" ng-click="ctrl.submitForm()">
           Create Project
         </button>
       </div>
