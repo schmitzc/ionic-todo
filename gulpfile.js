@@ -90,6 +90,8 @@ gulp.task('jscs', function() {
     .pipe(jscs.reporter());
 });
 
+gulp.task('pre-commit', ['jshint', 'jscs']);
+
 function runAppiumSpecs(platform) {
   sh.exec('PLATFORM=' + platform + ' mocha spec/appium/**/*.spec.js');
 }
