@@ -10,6 +10,7 @@ var rename = require('gulp-rename');
 var sh = require('shelljs');
 var closureCompiler = require('gulp-closure-compiler');
 var jshint = require('gulp-jshint');
+var jscs = require('gulp-jscs');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
@@ -80,6 +81,13 @@ gulp.task('jshint', function() {
     .src(paths.javascript)
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
+});
+
+gulp.task('jscs', function() {
+  gulp
+    .src(paths.javascript)
+    .pipe(jscs())
+    .pipe(jscs.reporter());
 });
 
 function runAppiumSpecs(platform) {

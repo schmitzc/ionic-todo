@@ -40,7 +40,7 @@
     }
 
     function resetProject() {
-      return { title: '' };
+      return {title: ''};
     }
   }
 })();

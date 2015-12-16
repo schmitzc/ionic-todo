@@ -33,7 +33,7 @@
     }
 
     function resetTask() {
-      return { title: '' };
+      return {title: ''};
     }
 
     function closeNewTask() {

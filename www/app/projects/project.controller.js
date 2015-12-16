@@ -146,7 +146,7 @@
               if (!$scope.data.title) {
                 e.preventDefault();
               } else {
-                ctrl.createProject({ title: $scope.data.title });
+                ctrl.createProject({title: $scope.data.title});
                 return;
               }
             }
