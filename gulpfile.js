@@ -80,14 +80,16 @@ gulp.task('jshint', function() {
   gulp
     .src(paths.javascript)
     .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'));
+    .pipe(jshint.reporter('jshint-stylish'))
+    .pipe(jshint.reporter('fail'));
 });
 
 gulp.task('jscs', function() {
   gulp
     .src(paths.javascript)
     .pipe(jscs())
-    .pipe(jscs.reporter());
+    .pipe(jscs.reporter())
+    .pipe(jscs.reporter('fail'));
 });
 
 gulp.task('pre-commit', ['jshint', 'jscs']);
