@@ -84,6 +84,15 @@ describe('Projects', function() {
     });
   });
 
+  it('should complete a task', function() {
+    var tasks = getTasks();
+    expect(tasks.count()).toEqual(1);
+
+    tasks.get(0).click();
+
+    expect(getTasks()).toEqual(0);
+  });
+
   function getActiveProjectTitle() {
     return element(by.css('.active-project-title')).getText()
   }

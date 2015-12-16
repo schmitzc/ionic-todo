@@ -210,4 +210,19 @@ describe('project controller', function() {
     controller.toggleProjects();
     expect(ionicSideMenuDelegateMock.toggleLeft).toHaveBeenCalled();
   });
+
+  describe('complete task', function() {
+    beforeEach(function() {
+      controller.activeProject.tasks.push(taskData);
+      controller.completeTask(0);
+    });
+
+    it('should remove the task from the project', function() {
+      expect(controller.activeProject.tasks.length).toEqual(0);
+    });
+
+    it('should save the updated task list', function() {
+      expect(projectServiceMock.save).toHaveBeenCalledWith(projects);
+    });
+  });
 });

@@ -31,6 +31,7 @@
     ctrl.closeNewProject = closeNewProject;
     ctrl.createTask = createTask;
     ctrl.closeNewTask = closeNewTask;
+    ctrl.completeTask = completeTask;
 
     activate();
 
@@ -97,6 +98,11 @@
 
     function newTask() {
       ctrl.taskModal.show();
+    }
+
+    function completeTask(index) {
+      ctrl.activeProject.tasks.splice(index, 1);
+      projectService.save(ctrl.projects);
     }
 
     function createProject(project) {

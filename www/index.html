@@ -32,7 +32,7 @@
 
         <ion-content scroll="false"> 
           <ion-list>
-            <ion-item ng-repeat="task in ctrl.activeProject.tasks">
+            <ion-item ng-repeat="task in ctrl.activeProject.tasks" ng-click="ctrl.completeTask($index)">
               <span class="task">{{task.title}}</span>
             </ion-item>
           </ion-list>
