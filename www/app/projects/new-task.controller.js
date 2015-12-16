@@ -7,7 +7,7 @@
   function NewTaskController($rootScope) {
     var ctrl = this;
 
-    ctrl.task = { title: "" };
+    ctrl.task = resetTask();
 
     ctrl.submitForm = submitForm;
     ctrl.submitTask = submitTask;
@@ -28,8 +28,12 @@
     }
 
     function resetForm() {
-      ctrl.task = { title: "" };
+      ctrl.task = resetTask();
       ctrl.submitted = false;
+    }
+
+    function resetTask() {
+      return { title: '' };
     }
 
     function closeNewTask() {

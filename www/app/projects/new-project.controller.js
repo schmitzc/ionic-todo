@@ -8,7 +8,7 @@
   function NewProjectController($rootScope) {
     var ctrl = this;
 
-    ctrl.project = { title: "" };
+    ctrl.project = resetProject();
 
     ctrl.submitForm = submitForm;
     ctrl.submitProject = submitProject;
@@ -35,8 +35,12 @@
     }
 
     function resetForm() {
-      ctrl.project = { title: "" };
+      ctrl.project = resetProject();
       ctrl.submitted = false;
+    }
+
+    function resetProject() {
+      return { title: '' };
     }
   }
 })();

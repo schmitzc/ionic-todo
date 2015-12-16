@@ -9,6 +9,7 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
 var closureCompiler = require('gulp-closure-compiler');
+var jshint = require('gulp-jshint');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
@@ -73,6 +74,13 @@ gulp.task('git-check', function(done) {
 
 gulp.task('test-ios', runAppiumSpecsOnIos);
 gulp.task('test-android', runAppiumSpecsOnAndroid);
+
+gulp.task('jshint', function() {
+  gulp
+    .src(paths.javascript)
+    .pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'));
+});
 
 function runAppiumSpecs(platform) {
   sh.exec('PLATFORM=' + platform + ' mocha spec/appium/**/*.spec.js');

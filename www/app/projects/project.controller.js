@@ -23,8 +23,6 @@
 
     var ctrl = this;
 
-    ctrl.task = { title: "" };
-
     ctrl.toggleProjects = toggleProjects;
     ctrl.selectProject = selectProject;
     ctrl.newProject = newProject;
@@ -72,7 +70,7 @@
       $scope.data = {};
 
       $timeout(function() {
-        if (ctrl.projects.length == 0) {
+        if (ctrl.projects.length === 0) {
           initialCreateProjectPopup();
         }
       });
