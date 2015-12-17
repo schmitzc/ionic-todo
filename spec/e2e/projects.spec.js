@@ -82,6 +82,8 @@ describe('Projects', function() {
       element(by.css('.close-new-project')).click();
       expect(modalEl.isDisplayed()).toBeFalsy();
     });
+
+    toggleProjectsMenu();
   });
 
   it('should complete a task', function() {
@@ -90,7 +92,7 @@ describe('Projects', function() {
 
     tasks.get(0).click();
 
-    expect(getTasks()).toEqual(0);
+    expect(getTasks().count()).toEqual(0);
   });
 
   function getActiveProjectTitle() {

@@ -10,6 +10,7 @@ require(path.resolve('spec/appium/setup.js'))(function(driver) {
   var openNewTaskSelector = '.open-new-task';
   var toggleProjectsSelector = '.toggle-projects-menu';
   var openNewProjectSelector = '.open-new-project';
+  var taskSelector = '.task';
 
   it('should create the initial project', function () {
     return driver
@@ -28,7 +29,7 @@ require(path.resolve('spec/appium/setup.js'))(function(driver) {
       .waitForElementByCss('.task-title', wd.asserters.isDisplayed, waitTimeout)
       .type(task)
       .elementByCss('.create-task').click()
-      .elementsByCss('.task').then(function(elements) {
+      .elementsByCss(taskSelector).then(function(elements) {
         elements.length.should.equal(1);
         elements[0].text().should.become(task);
       });
@@ -79,6 +80,18 @@ require(path.resolve('spec/appium/setup.js'))(function(driver) {
       .click()
       .waitForElementByCss('.close-new-project', wd.asserters.isDisplayed, waitTimeout)
       .click()
-      .waitForElementByCss('.new-project-modal', wd.asserters.isNotDisplayed, waitTimeout);
+      .waitForElementByCss('.new-project-modal', wd.asserters.isNotDisplayed, waitTimeout)
+      .elementByCss(toggleProjectsSelector).click()
+  });
+
+  it('should complete a task', function() {
+    return driver
+      .elementsByCss(taskSelector).then(function(elements) {
+        elements[0].click();
+      })
+      .sleep(waitTimeout)
+      .elementsByCss(taskSelector).then(function(elements) {
+        elements.length.should.equal(0);
+      });
   });
 });
