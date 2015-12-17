@@ -16,12 +16,6 @@ describe('new project controller', function() {
     });
   }));
 
-  describe('activate controller', function() {
-    it('should set project title to empty string', function() {
-      expect(controller.project).toEqual({ title: "" });
-    });
-  });
-
   it('should submit the form', function() {
     controller.submitForm();
     expect(controller.submitted).toBeTruthy();
@@ -30,10 +24,9 @@ describe('new project controller', function() {
   describe('submit project', function() {
     describe('with project data', function() {
       beforeEach(function() {
-        controller.project = projectData;
         controller.submitted = true;
 
-        controller.submitProject(controller.project);
+        controller.submitProject(projectData);
       });
 
       it('should broadcast a new project submitted event', function() {
@@ -41,7 +34,7 @@ describe('new project controller', function() {
       });
 
       it('should reset the form', function() {
-        expect(controller.project).toEqual({ title: "" });
+        expect(projectData).toEqual({ title: '' });
         expect(controller.submitted).toBeFalsy();
       });
     });
@@ -54,13 +47,11 @@ describe('new project controller', function() {
 
   describe('close the new project modal', function() {
     beforeEach(function() {
-      controller.project = projectData;
       controller.submitted = true;
       controller.closeNewProject();
     });
 
     it('should reset the project form', function() {
-      expect(controller.project).toEqual({ title: "" });
       expect(controller.submitted).toBeFalsy();
     });
 

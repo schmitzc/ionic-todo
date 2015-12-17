@@ -8,13 +8,15 @@ require(path.resolve('spec/appium/setup.js'))(function(driver) {
   var initialProjectTitle = 'Tests';
   var activeProjectSelector = '.active-project-title';
   var openNewTaskSelector = '.open-new-task';
+  var taskTitleSelector = '.task-title';
+  var taskSelector = '.task';
   var toggleProjectsSelector = '.toggle-projects-menu';
   var openNewProjectSelector = '.open-new-project';
-  var taskSelector = '.task';
+  var projectTitleSelector = '.project-title';
 
   it('should create the initial project', function () {
     return driver
-      .elementByCss('.project-title').type(initialProjectTitle)
+      .elementByCss(projectTitleSelector).type(initialProjectTitle)
       .elementByCss('.button-positive').click()
       .elementByCss(activeProjectSelector).text()
       .should.become(initialProjectTitle);
@@ -26,7 +28,7 @@ require(path.resolve('spec/appium/setup.js'))(function(driver) {
     return driver
       .waitForElementByCss(openNewTaskSelector, wd.asserters.isDisplayed, waitTimeout)
       .click()
-      .waitForElementByCss('.task-title', wd.asserters.isDisplayed, waitTimeout)
+      .waitForElementByCss(taskTitleSelector, wd.asserters.isDisplayed, waitTimeout)
       .type(task)
       .elementByCss('.create-task').click()
       .elementsByCss(taskSelector).then(function(elements) {
@@ -39,8 +41,9 @@ require(path.resolve('spec/appium/setup.js'))(function(driver) {
     return driver
       .waitForElementByCss(openNewTaskSelector, wd.asserters.isDisplayed, waitTimeout)
       .click()
-      .waitForElementByCss('.close-new-task', wd.asserters.isDisplayed, waitTimeout)
-      .click()
+      .waitForElementByCss(taskTitleSelector, wd.asserters.isDisplayed, waitTimeout)
+      .getValue().should.become('')
+      .elementByCss('.close-new-task').click()
       .waitForElementByCss('.new-task-modal', wd.asserters.isNotDisplayed, waitTimeout);
   });
 
@@ -50,7 +53,7 @@ require(path.resolve('spec/appium/setup.js'))(function(driver) {
     return driver
       .elementByCss(toggleProjectsSelector).click()
       .elementByCss(openNewProjectSelector).click()
-      .elementByCss('.project-title').type(project)
+      .elementByCss(projectTitleSelector).type(project)
       .elementByCss('.create-project').click()
       .elementByCss(activeProjectSelector).text()
       .should.become(project)
@@ -68,7 +71,7 @@ require(path.resolve('spec/appium/setup.js'))(function(driver) {
       })
       .elementByCss(activeProjectSelector).text()
       .should.become(initialProjectTitle)
-      .elementsByCss('.task').then(function(elements) {
+      .elementsByCss(taskSelector).then(function(elements) {
         elements.length.should.equal(1);
       });
   });
@@ -78,8 +81,9 @@ require(path.resolve('spec/appium/setup.js'))(function(driver) {
       .elementByCss(toggleProjectsSelector).click()
       .waitForElementByCss(openNewProjectSelector, wd.asserters.isDisplayed, waitTimeout)
       .click()
-      .waitForElementByCss('.close-new-project', wd.asserters.isDisplayed, waitTimeout)
-      .click()
+      .waitForElementByCss(projectTitleSelector, wd.asserters.isDisplayed, waitTimeout)
+      .getValue().should.become('')
+      .elementByCss('.close-new-project').click()
       .waitForElementByCss('.new-project-modal', wd.asserters.isNotDisplayed, waitTimeout)
       .elementByCss(toggleProjectsSelector).click()
   });

@@ -8,8 +8,6 @@
   function NewProjectController($rootScope) {
     var ctrl = this;
 
-    ctrl.project = resetProject();
-
     ctrl.submitForm = submitForm;
     ctrl.submitProject = submitProject;
     ctrl.closeNewProject = closeNewProject;
@@ -25,6 +23,7 @@
 
       $rootScope.$broadcast('newProjectSubmitted', project);
 
+      project.title = '';
       resetForm();
     }
 
@@ -35,12 +34,7 @@
     }
 
     function resetForm() {
-      ctrl.project = resetProject();
       ctrl.submitted = false;
-    }
-
-    function resetProject() {
-      return {title: ''};
     }
   }
 })();

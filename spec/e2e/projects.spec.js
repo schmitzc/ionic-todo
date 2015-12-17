@@ -19,7 +19,7 @@ describe('Projects', function() {
     openNewTaskModal();
 
     var task = 'Write tests';
-    element(by.model('task.title')).sendKeys(task);
+    getTaskTitleInput().sendKeys(task);
     element(by.buttonText('Create Task')).click();
 
     var tasks = getTasks();
@@ -33,6 +33,10 @@ describe('Projects', function() {
     var modalEl = element(by.css('.new-task-modal'));
     expect(modalEl.isDisplayed()).toBeTruthy();
 
+    getTaskTitleInput().getAttribute('value').then(function(value) {
+      expect(value).toEqual('');
+    });
+
     element(by.css('.close-new-task')).click();
     expect(modalEl.isDisplayed()).toBeFalsy();
   });
@@ -45,7 +49,7 @@ describe('Projects', function() {
       openNewProjectButton.click();
 
       var project = 'Release';
-      element(by.model('project.title')).sendKeys(project);
+      getProjectTitleInput().sendKeys(project);
       element(by.buttonText('Create Project')).click();
 
       var projects = getProjects();
@@ -78,6 +82,10 @@ describe('Projects', function() {
 
       var modalEl = element(by.css('.new-project-modal'));
       expect(modalEl.isDisplayed()).toBeTruthy();
+
+      getProjectTitleInput().getAttribute('value').then(function(value) {
+        expect(value).toEqual('');
+      });
 
       element(by.css('.close-new-project')).click();
       expect(modalEl.isDisplayed()).toBeFalsy();
@@ -113,6 +121,14 @@ describe('Projects', function() {
 
   function openNewTaskModal() {
     element(by.css('.open-new-task')).click();
+  }
+
+  function getTaskTitleInput() {
+    return element(by.model('task.title'));
+  }
+
+  function getProjectTitleInput() {
+    return element(by.model('project.title'));
   }
 
   function toggleProjectsMenu() {
